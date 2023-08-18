@@ -1,5 +1,12 @@
+import ar.edu.unlu.poo.lista.ListaEnlazada;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+
+        ListaEnlazada lista = new ListaEnlazada();
+
+        lista.agregar("Hola ");
+        lista.agregar("mundo!");
+        System.out.println(lista);
     }
 }
