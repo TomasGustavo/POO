@@ -12,15 +12,14 @@ public class ListaEnlazada {
         nuevoNodo.setDato(dato);
         if(inicio == null){
             inicio = nuevoNodo;
-            cantidad++;
         } else{
             Nodo nodoAux = inicio;
             while(nodoAux.getProximo() != null){
                 nodoAux = nodoAux.getProximo();
             }
             nodoAux.setProximo(nuevoNodo);
-            cantidad++;
         }
+        cantidad++;
     }
 
     public void eliminar(Object dato){
@@ -66,7 +65,6 @@ public class ListaEnlazada {
             if(posicion == 0){
                 inicio = nuevoNodo;
                 nuevoNodo.setProximo(nodoAux);
-                rta = true;
             } else{
                 int i = 0;
                 while ((i+1) != posicion){
@@ -75,8 +73,8 @@ public class ListaEnlazada {
                 }
                 nuevoNodo.setProximo(nodoAux.getProximo());
                 nodoAux.setProximo(nuevoNodo);
-                rta = true;
             }
+            rta = true;
         }
         cantidad++;
         return rta;
