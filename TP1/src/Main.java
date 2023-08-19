@@ -1,13 +1,16 @@
 import ar.edu.unlu.poo.lista.ListaEnlazada;
 import ar.edu.unlu.poo.lista.ListaEnlazadaDoble;
+import ar.edu.unlu.poo.pila.Pila;
 
 public class Main {
     public static void main(String[] args) {
 
+        // ------------------ PUNTO 1 ------------------
+
         /*ListaEnlazada lista = new ListaEnlazada();
 
         // metodo de agregar
-        System.out.println(lista.vacia());
+        System.out.println("vacia?: " + lista.vacia());
         System.out.println(lista.longitud());
         for(int i = 0; i<8;i++){
             lista.agregar(i);
@@ -34,11 +37,14 @@ public class Main {
         System.out.println("------------------");
         */
 
+        // ------------------ PUNTO 2 ------------------
+
+        /*
         ListaEnlazadaDoble listaD = new ListaEnlazadaDoble();
 
         // metodo de agregar
         System.out.println("--------- AGREGAR ---------");
-        System.out.println(listaD.vacia());
+        System.out.println("vacia?: " + listaD.vacia());
         System.out.println(listaD.longitud());
         for(int i = 0; i<8;i++){
             listaD.agregar(i);
@@ -67,5 +73,36 @@ public class Main {
         System.out.print(listaD);
         System.out.println(listaD.longitud());
         System.out.println("------------------");
+
+        */
+
+        // ------------------ PUNTO 3 ------------------
+
+        Pila pila = new Pila();
+
+        // metodo de apilar
+        System.out.println("--------- APILAR ---------");
+        System.out.println("---------- ANTES DE APILAR -------");
+        System.out.println("vacia?: " + pila.p_vacia());
+        System.out.println("cantidad de elementos de la pila: " + pila.p_longitud());
+        for(int i = 0; i<8;i++){
+            pila.p_apilar(i);
+        }
+        System.out.println("---------- DESPUES DE APILAR -------");
+        System.out.print(pila);
+        System.out.println("cantidad de elementos de la pila: " + pila.p_longitud());
+        System.out.println("Tope: " + pila.p_tope());
+        System.out.println("------------------");
+
+        // metodo de desapilar
+        System.out.println("--------- DESAPILAR ---------");
+        Object x = pila.p_desapilar();
+        System.out.print(pila);
+        System.out.println("elemento recuperado: " + x);
+        System.out.println("cantidad de elementos de la pila: " + pila.p_longitud());
+        System.out.println("Tope: " + pila.p_tope());
+        System.out.println("------------------");
+
+
     }
 }
