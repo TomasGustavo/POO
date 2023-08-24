@@ -1,3 +1,4 @@
+import ar.edu.unlu.poo.cola.Cola;
 import ar.edu.unlu.poo.lista.ListaEnlazada;
 import ar.edu.unlu.poo.lista.ListaEnlazadaDoble;
 import ar.edu.unlu.poo.pila.Pila;
@@ -7,7 +8,7 @@ public class Main {
 
         // ------------------ PUNTO 1 ------------------
 
-        /*ListaEnlazada lista = new ListaEnlazada();
+        /**/ListaEnlazada lista = new ListaEnlazada();
 
         // metodo de agregar
         System.out.println("vacia?: " + lista.vacia());
@@ -35,11 +36,11 @@ public class Main {
         System.out.print(lista);
         System.out.println(lista.longitud());
         System.out.println("------------------");
-        */
+
 
         // ------------------ PUNTO 2 ------------------
 
-        /*
+        /**/
         ListaEnlazadaDoble listaD = new ListaEnlazadaDoble();
 
         // metodo de agregar
@@ -74,10 +75,10 @@ public class Main {
         System.out.println(listaD.longitud());
         System.out.println("------------------");
 
-        */
+
 
         // ------------------ PUNTO 3 ------------------
-
+        /**/
         Pila pila = new Pila();
 
         // metodo de apilar
@@ -101,6 +102,37 @@ public class Main {
         System.out.println("elemento recuperado: " + x);
         System.out.println("cantidad de elementos de la pila: " + pila.p_longitud());
         System.out.println("Tope: " + pila.p_tope());
+        System.out.println("------------------");
+
+
+
+        // ------------------ PUNTO 4 ------------------
+        /**/
+        Cola cola = new Cola();
+
+        // metodo de encolar
+        System.out.println("--------- ENCOLAR ---------");
+        System.out.println("---------- ANTES DE ENCOLAR -------");
+        System.out.println("vacia?: " + cola.c_vacia());
+        System.out.println("cantidad de elementos de la cola: " + cola.c_longitud());
+        for(int i = 0; i<8;i++){
+            cola.c_encolar(i);
+        }
+        System.out.println("---------- DESPUES DE ENCOLAR -------");
+        System.out.print(cola);
+        System.out.println("cantidad de elementos de la cola: " + cola.c_longitud());
+        cola.mostrarFrente();
+        cola.mostrarFinal();
+        System.out.println("------------------");
+
+        // metodo de desencolar
+        System.out.println("--------- DESENCOLAR ---------");
+        Object y = cola.c_desencolar();
+        System.out.print(cola);
+        System.out.println("elemento recuperado: " + y);
+        System.out.println("cantidad de elementos de la cola: " + cola.c_longitud());
+        cola.mostrarFrente();
+        cola.mostrarFinal();
         System.out.println("------------------");
 
 

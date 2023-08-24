@@ -55,18 +55,19 @@ public class Pila {
         Nodo nodoAux = tope;
         if(p_vacia()){
             acum = "Pila vacia";
-        }
-        System.out.print("Contenido de la pila: ");
-        Object x;
-        Pila pilaAux = new Pila();
-        while(!p_vacia()){
-            x = p_desapilar();
-            acum += x + "\n";
-            pilaAux.p_apilar(x);
-        }
-        while(!pilaAux.p_vacia()){
-            x = pilaAux.p_desapilar();
-            p_apilar(x);
+        }else{
+            System.out.print("Contenido de la pila: ");
+            Object x;
+            Pila pilaAux = new Pila();
+            while(!p_vacia()){
+                x = p_desapilar();
+                acum += x + "\n";
+                pilaAux.p_apilar(x);
+            }
+            while(!pilaAux.p_vacia()){
+                x = pilaAux.p_desapilar();
+                p_apilar(x);
+            }
         }
         return acum;
     }
