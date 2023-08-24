@@ -69,7 +69,7 @@ public class Main {
 
         // metodo insertar por posicion (logica)
         System.out.println("--------- INSERTAR ---------");
-        boolean rta = listaD.insertarPosicion(1,10);
+        rta = listaD.insertarPosicion(1,10);
         System.out.println(rta);
         System.out.print(listaD);
         System.out.println(listaD.longitud());
