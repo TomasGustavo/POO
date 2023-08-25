@@ -1,16 +1,14 @@
 package ar.edu.unlu.poo.punto5;
 
+import java.util.Scanner;
+
 public class ScreenUtilities {
-    public static void LimpiarPantalla() {
+    public static void pausa() {
 
-        try {
+        Scanner sc = new Scanner(System.in);
 
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-
-        } catch (Exception ignored) {
-
-
-        }
+        System.out.println("PRESIONE ENTER PARA CONTINUAR");
+        sc.nextLine();
 
 
     }

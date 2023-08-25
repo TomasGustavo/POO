@@ -66,18 +66,46 @@ public class ListaTareas {
         agregarTarea(desc, priori, estado == 1, fechaLimite);
     }
 
-    public void modificarDescripcion(String nuevaDescp){
-        tarea.setDescripcion(nuevaDescp);
-    }
-    public void modificarEstado(int i){
-        if(i == 1){
-            tarea.setEstado(true);
-        } else if (i ==2){
-            tarea.setEstado(false);
+    /*public Tarea recuperar(int posicion){
+        int i = 0;
+        Tarea tareaAux = new Tarea();
+        tareaAux = tarea;
+        while( i != (posicion-1)){
+            tareaAux = tareaAux.getProximaTarea();
+            i++;
         }
+        return tareaAux;
     }
-    public void modificarPrioridad(int i){
-        tarea.setPrioridad(i);
+
+     */
+
+    public void modificarDescripcion(String nuevaDescp, int posicion){
+        int i = 0;
+        Tarea tareaAux = tarea;
+        while( i != (posicion-1)){
+            tareaAux = tareaAux.getProximaTarea();
+            i++;
+        }
+        tareaAux.setDescripcion(nuevaDescp);
+    }
+    public void modificarEstado(int posicion){
+        int i = 0;
+        Tarea tareaAux = tarea;
+        while( i != (posicion-1)){
+            tareaAux = tareaAux.getProximaTarea();
+            i++;
+        }
+        tareaAux.setEstado(!tareaAux.getEstado());
+
+    }
+    public void modificarPrioridad(int priori, int posicion){
+        int i = 0;
+        Tarea tareaAux = tarea;
+        while( i != (posicion-1)){
+            tareaAux = tareaAux.getProximaTarea();
+            i++;
+        }
+        tareaAux.setPrioridad(priori);
     }
 
     public String toString(){
@@ -87,15 +115,16 @@ public class ListaTareas {
             acum = "No hay ninguna tarea cargada!";
         }
         Tarea tareaAux = tarea;
-        System.out.println("Descripcion \t||\tEstado \t||\tFecha limite\n");
+        System.out.println("Descripcion \t||\tEstado \t||\tPrioridad \t||\tFecha limite\n");
         while(tareaAux != null){
+
             if(tareaAux.getFecha_limite().isBefore(LocalDate.now()) && (!tareaAux.getEstado())){
-                acum += i +"|" +tareaAux.getDescripcion() + "\t||\t" + "Incompleta :(" + " (Vencida)" + "\t||\t" + tareaAux.getFecha_limite() + "\n";
+                acum += i +"|" +tareaAux.getDescripcion() + "\t||\t" + "Incompleta :(" + " (Vencida)" + "\t||\t" + tareaAux.getPrioridad() + "\t||\t"+ tareaAux.getFecha_limite() + "\n";
             }else{
                 if(tareaAux.getEstado()){
-                    acum += i +"|" + tareaAux.getDescripcion() + "\t||\t" + "Completada <3" + "\t||\t" + tareaAux.getFecha_limite() + "\n";
+                    acum += i +"|" + tareaAux.getDescripcion() + "\t||\t" + "Completada <3" + "\t||\t"  + tareaAux.getPrioridad() + "\t||\t" + tareaAux.getFecha_limite() + "\n";
                 }else{
-                    acum += i +"|" + tareaAux.getDescripcion() + "\t||\t" + "Incompleta :(" + "\t||\t" + tareaAux.getFecha_limite() + "\n";
+                    acum += i +"|" + tareaAux.getDescripcion() + "\t||\t" + "Incompleta :(" + "\t||\t" + tareaAux.getPrioridad() + "\t||\t" + tareaAux.getFecha_limite() + "\n";
                 }
             }
             i++;
