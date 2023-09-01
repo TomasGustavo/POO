@@ -1,6 +1,4 @@
-import ar.edu.unlu.poo.punto5.ScreenUtilities;
 import ar.edu.unlu.poo.punto5.ListaTareas;
-import ar.edu.unlu.poo.punto5.Tarea;
 
 import java.time.LocalDate;
 import java.util.Scanner;

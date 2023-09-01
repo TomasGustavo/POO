@@ -2,6 +2,7 @@ package ar.edu.unlu.poo.Punto6;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Biblioteca {
     // Atributos
     private List<Libro> biblioteca ;
@@ -28,8 +29,8 @@ public class Biblioteca {
     public void realizarPrestamo(String idLibro,int cantidad){
         for(Libro libro : biblioteca){
             if(libro.getNombre().equalsIgnoreCase(idLibro) || libro.getAutor().equalsIgnoreCase(idLibro) ){
-                if(libro.getStockEnBiblioteca() <= 1){
-                    System.out.println("No es posible realizar el prestamo porque solo queda 1 libro disponible en el lugar");
+                if((libro.getStockEnBiblioteca()-cantidad)< 1){
+                    System.out.println("No es posible realizar el prestamo de ese monto "+" '"+cantidad+"' "+" porque solo queda/quedaria 1 libro disponible en el lugar");
                 }else{
                     libro.setStockEnBiblioteca(libro.getStockEnBiblioteca()-cantidad);
                     libro.setCantidadPrestados(libro.getCantidadPrestados()+cantidad);
@@ -71,5 +72,13 @@ public class Biblioteca {
         }
 
         return acum;
+    }
+
+    public void agregarEjemplares(String idlibro, int cantidad) {
+        for (Libro libro : biblioteca) {
+            if (libro.getNombre().equalsIgnoreCase(idlibro) || libro.getAutor().equalsIgnoreCase(idlibro)){
+                libro.agregarEjemplares(cantidad);
+            }
+        }
     }
 }

@@ -41,5 +41,8 @@ public class Libro {
         return cantidadPrestados;
     }
 
+    public void agregarEjemplares(int cantidad){
+        this.stockEnBiblioteca += cantidad;
+    }
 
 }
