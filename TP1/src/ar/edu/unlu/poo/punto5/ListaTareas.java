@@ -1,6 +1,7 @@
 package ar.edu.unlu.poo.punto5;
 
 import ar.edu.unlu.poo.lista.Nodo;
+import ar.edu.unlu.poo.punto5.TareaPrioridadComparator;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -13,12 +14,13 @@ public class ListaTareas {
     Tarea tarea = null;
 
     // Metodos
-    public void agregarTarea(String desc, int prioridad,boolean estado, LocalDate fecha){
+    public void agregarTarea(String desc, int prioridad,boolean estado, LocalDate fecha, LocalDate fechaR){
         Tarea nuevaTarea = new Tarea();
         nuevaTarea.setDescripcion(desc);
         nuevaTarea.setPrioridad(prioridad);
         nuevaTarea.setEstado(estado);
         nuevaTarea.setFecha_limite(fecha);
+        nuevaTarea.setFecha_recordatorio(fechaR);
         if(tarea == null){
             tarea = nuevaTarea;
             tarea.setProximaTarea(null);
@@ -44,6 +46,7 @@ public class ListaTareas {
 
         System.out.print("\ningrese numero de prioridad de la tarea: ");
         priori = sc.nextInt();
+        sc.nextLine();
 
         System.out.print("\ningrese estado (1- completada | 2- imcompleta) de la tarea: ");
         estado = sc.nextInt();
@@ -61,9 +64,23 @@ public class ListaTareas {
             System.out.println("Formato de fecha incorrecto. Asegúrate de usar yyyy-MM-dd.");
         }
 
-        sc.close();
+        System.out.println("Desea agregar fecha recordatoria?[1- SI | 2- NO]: ");
+        int fr = sc.nextInt();
+        sc.nextLine();
+        LocalDate fechaR = null;
+        if(fr == 1){
+            System.out.print("\ningrese fecha Recordatoria de la tarea[yyyy-MM-dd]: ");
+            fechaIngresada = sc.nextLine();
 
-        agregarTarea(desc, priori, estado == 1, fechaLimite);
+            try {
+                fechaR = LocalDate.parse(fechaIngresada, formatter);
+                System.out.println("Fecha ingresada: " + fechaR);
+            } catch (DateTimeParseException e) {
+                System.out.println("Formato de fecha incorrecto. Asegúrate de usar yyyy-MM-dd.");
+            }
+        }
+
+        agregarTarea(desc, priori, estado == 1, fechaLimite, fechaR);
     }
 
     /*public Tarea recuperar(int posicion){
@@ -95,8 +112,9 @@ public class ListaTareas {
             tareaAux = tareaAux.getProximaTarea();
             i++;
         }
-        tareaAux.setEstado(!tareaAux.getEstado());
-
+        if(!tareaAux.getEstado()){
+            tareaAux.setEstado(true);
+        }
     }
     public void modificarPrioridad(int priori, int posicion){
         int i = 0;
@@ -107,6 +125,42 @@ public class ListaTareas {
         }
         tareaAux.setPrioridad(priori);
     }
+
+    public void ordenarPorPrioridad() {
+        if (tarea == null || tarea.getProximaTarea() == null) {
+            // La lista está vacía o tiene solo un elemento, no es necesario ordenar
+            return;
+        }
+
+        TareaPrioridadComparator comparator = new TareaPrioridadComparator();
+        boolean huboCambio;
+
+        do {
+            huboCambio = false;
+            Tarea tareaActual = tarea;
+            Tarea tareaPrevia = null;
+
+            while (tareaActual.getProximaTarea() != null) {
+                Tarea tareaSiguiente = tareaActual.getProximaTarea();
+
+                if (comparator.compare(tareaActual, tareaSiguiente) > 0) {
+                    // Intercambia las tareas si la tareaActual tiene una prioridad mayor
+                    if (tareaPrevia == null) {
+                        tarea = tareaSiguiente;
+                    } else {
+                        tareaPrevia.setProximaTarea(tareaSiguiente);
+                    }
+                    tareaActual.setProximaTarea(tareaSiguiente.getProximaTarea());
+                    tareaSiguiente.setProximaTarea(tareaActual);
+                    huboCambio = true;
+                }
+
+                tareaPrevia = tareaActual;
+                tareaActual = tareaSiguiente;
+            }
+        } while (huboCambio);
+    }
+
 
     public String toString(){
         String acum = "";
@@ -120,6 +174,11 @@ public class ListaTareas {
 
             if(tareaAux.getFecha_limite().isBefore(LocalDate.now()) && (!tareaAux.getEstado())){
                 acum += i +"|" +tareaAux.getDescripcion() + "\t||\t" + "Incompleta :(" + " (Vencida)" + "\t||\t" + tareaAux.getPrioridad() + "\t||\t"+ tareaAux.getFecha_limite() + "\n";
+            }else if((tareaAux.getFecha_recordatorio().isAfter(LocalDate.now()) || tareaAux.getFecha_recordatorio().isEqual(LocalDate.now())) && (!tareaAux.getEstado())){
+                if(tareaAux.getFecha_limite().isAfter(tareaAux.getFecha_recordatorio()) ||tareaAux.getFecha_limite().isEqual(tareaAux.getFecha_recordatorio()) ){
+                    tareaAux.setPrioridad(1);
+                }
+                acum += i +"|" +tareaAux.getDescripcion() + "\t||\t" + "Incompleta :(" + " (Por vencer)" + "\t||\t" + tareaAux.getPrioridad() + "\t||\t"+ tareaAux.getFecha_limite() + "\n";
             }else{
                 if(tareaAux.getEstado()){
                     acum += i +"|" + tareaAux.getDescripcion() + "\t||\t" + "Completada <3" + "\t||\t"  + tareaAux.getPrioridad() + "\t||\t" + tareaAux.getFecha_limite() + "\n";

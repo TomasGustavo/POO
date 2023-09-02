@@ -84,53 +84,6 @@ public class MainPunto6 {
 
         Biblioteca biblio = new Biblioteca();
 
-        /*
-        biblio.agregarLibro("Corazon delator", "Edgar Alan Poe",250,10,0);
-        biblio.agregarLibro("Viaje al centro de la tierra", "Julio Verne",250,2,0);
-        System.out.println(biblio);
-        biblio.mayorNroPaginas(0,1);
-
-        ScreenUtilities.pausa();
-        ScreenUtilities.LimpiarPantalla();
-
-        System.out.println(AnsiColor.MAGENTA + "Seleecione el NOMBRE o AUTOR del libro que quiere hacer el prestamo: " + AnsiColor.RESET);
-        Scanner sc = new Scanner(System.in);
-        String opc = sc.nextLine();
-
-        System.out.println("\n");
-
-        biblio.realizarPrestamo(opc,1);
-        biblio.realizarPrestamo(opc,1);
-        System.out.println("\n");
-        System.out.println(AnsiColor.MAGENTA+ "prestamos totales: " + AnsiColor.RESET +biblio.getPrestamosTotales());
-
-        ScreenUtilities.pausa();
-        ScreenUtilities.LimpiarPantalla();
-
-        System.out.println(AnsiColor.MAGENTA + "seleecione el NOMBRE o AUTOR del libro que quiere hacer el prestamo: " + AnsiColor.RESET);
-        sc = new Scanner(System.in);
-        opc = sc.nextLine();
-
-        System.out.println("\n");
-
-        biblio.realizarPrestamo(opc,5);
-
-        System.out.println(AnsiColor.MAGENTA+ "prestamos totales: " + AnsiColor.RESET +biblio.getPrestamosTotales());
-
-        System.out.println(biblio);
-
-        ScreenUtilities.pausa();
-        ScreenUtilities.LimpiarPantalla();
-
-        System.out.println(AnsiColor.MAGENTA+ "vamos a agregar ejemplares de algun libro ya existente en la biblioteca, ingresa el nombre o autor del que desees");
-        opc = sc.nextLine();
-        System.out.println("\nIngresa la cantidad que quieras agregar"+ AnsiColor.RESET);
-        int cant = sc.nextInt();
-        sc.nextLine();
-        biblio.agregarEjemplares(opc,cant);
-
-        System.out.println(biblio);
-        */
         Scanner sc = new Scanner(System.in);
         boolean salir = false;
         while(!salir){
@@ -141,10 +94,7 @@ public class MainPunto6 {
                 case 1 -> main_ingresar(biblio);
                 case 2 -> main_agregar(biblio);
                 case 3 -> main_prestamo(biblio);
-                case 4 -> {
-                    System.out.println(biblio);
-                    ScreenUtilities.pausa();
-                }
+                case 4 -> System.out.println(biblio);
                 case 0 -> {
                     salir = true;
                     break;

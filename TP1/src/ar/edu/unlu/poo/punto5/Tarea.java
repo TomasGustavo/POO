@@ -7,6 +7,7 @@ public class Tarea {
     private int prioridad;
     private boolean estado;
     LocalDate fecha_limite;
+    LocalDate fecha_recordatorio;
     Tarea proximaTarea = null;
 
 
@@ -42,5 +43,12 @@ public class Tarea {
 
     public Tarea getProximaTarea() {
         return proximaTarea;
+    }
+
+    public void setFecha_recordatorio(LocalDate fecha){
+        this.fecha_recordatorio = fecha;
+    }
+    public LocalDate getFecha_recordatorio(){
+        return fecha_recordatorio;
     }
 }
