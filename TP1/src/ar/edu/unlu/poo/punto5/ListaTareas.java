@@ -1,8 +1,5 @@
 package ar.edu.unlu.poo.punto5;
 
-import ar.edu.unlu.poo.lista.Nodo;
-import ar.edu.unlu.poo.punto5.TareaPrioridadComparator;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -161,6 +158,17 @@ public class ListaTareas {
         } while (huboCambio);
     }
 
+    private boolean recordar(Tarea tareaAux){
+        boolean rta;
+        if(tareaAux.getFecha_recordatorio() == null){
+            rta = false;
+        }else{
+            rta = tareaAux.getFecha_recordatorio().isAfter(LocalDate.now()) || tareaAux.getFecha_recordatorio().isEqual(LocalDate.now());
+        }
+
+        return rta;
+    }
+
 
     public String toString(){
         String acum = "";
@@ -169,21 +177,29 @@ public class ListaTareas {
             acum = "No hay ninguna tarea cargada!";
         }
         Tarea tareaAux = tarea;
-        System.out.println("Descripcion \t||\tEstado \t||\tPrioridad \t||\tFecha limite\n");
+        //System.out.println("Descripcion \t||\tEstado \t||\tPrioridad \t||\tFecha limite\n");
         while(tareaAux != null){
 
             if(tareaAux.getFecha_limite().isBefore(LocalDate.now()) && (!tareaAux.getEstado())){
-                acum += i +"|" +tareaAux.getDescripcion() + "\t||\t" + "Incompleta :(" + " (Vencida)" + "\t||\t" + tareaAux.getPrioridad() + "\t||\t"+ tareaAux.getFecha_limite() + "\n";
-            }else if((tareaAux.getFecha_recordatorio().isAfter(LocalDate.now()) || tareaAux.getFecha_recordatorio().isEqual(LocalDate.now())) && (!tareaAux.getEstado())){
-                if(tareaAux.getFecha_limite().isAfter(tareaAux.getFecha_recordatorio()) ||tareaAux.getFecha_limite().isEqual(tareaAux.getFecha_recordatorio()) ){
-                    tareaAux.setPrioridad(1);
+                acum += i +""+ AnsiColor.BLUE + "| Descripcion:" +AnsiColor.BLUE +""+ tareaAux.getDescripcion() + AnsiColor.BLUE +"\nEstado:"+AnsiColor.YELLOW +" Incompleta :( (Vencida)" + AnsiColor.BLUE +"\nPrioridad:" + AnsiColor.YELLOW +tareaAux.getPrioridad() +AnsiColor.BLUE+ "\nFecha limite:" +AnsiColor.YELLOW+ tareaAux.getFecha_limite() + "\n\n";
+            }else if (recordar(tareaAux)) {
+                if (!tareaAux.getEstado()) {
+                    if (tareaAux.getFecha_limite().isAfter(tareaAux.getFecha_recordatorio()) || tareaAux.getFecha_limite().isEqual(tareaAux.getFecha_recordatorio())) {
+                        tareaAux.setPrioridad(1);
+                    }
+                    acum += i +""+ AnsiColor.BLUE + "| Descripcion: " +AnsiColor.YELLOW + tareaAux.getDescripcion() + AnsiColor.BLUE +"\nEstado:"+AnsiColor.YELLOW +" Incompleta :( (Por vencer)" + AnsiColor.BLUE +"\nPrioridad:" + AnsiColor.YELLOW +tareaAux.getPrioridad() +AnsiColor.BLUE+ "\nFecha limite:" +AnsiColor.YELLOW+ tareaAux.getFecha_limite() + "\n\n";
+                } else {
+                    if (tareaAux.getEstado()) {
+                        acum += i +""+ AnsiColor.BLUE + "| Descripcion: " +AnsiColor.YELLOW+ tareaAux.getDescripcion() + AnsiColor.BLUE +"\nEstado:"+AnsiColor.YELLOW +" Completada <3" + AnsiColor.BLUE +"\nPrioridad:" + AnsiColor.YELLOW +tareaAux.getPrioridad() +AnsiColor.BLUE+ "\nFecha limite:" +AnsiColor.YELLOW+ tareaAux.getFecha_limite() + "\n\n";
+                    } else {
+                        acum += i +""+ AnsiColor.BLUE + "| Descripcion: " +AnsiColor.YELLOW + tareaAux.getDescripcion() + AnsiColor.BLUE +"\nEstado:"+AnsiColor.YELLOW +" Incompleta :( " + AnsiColor.BLUE +"\nPrioridad:" + AnsiColor.YELLOW +tareaAux.getPrioridad() +AnsiColor.BLUE+ "\nFecha limite:" +AnsiColor.YELLOW+ tareaAux.getFecha_limite() + "\n\n";
+                    }
                 }
-                acum += i +"|" +tareaAux.getDescripcion() + "\t||\t" + "Incompleta :(" + " (Por vencer)" + "\t||\t" + tareaAux.getPrioridad() + "\t||\t"+ tareaAux.getFecha_limite() + "\n";
-            }else{
-                if(tareaAux.getEstado()){
-                    acum += i +"|" + tareaAux.getDescripcion() + "\t||\t" + "Completada <3" + "\t||\t"  + tareaAux.getPrioridad() + "\t||\t" + tareaAux.getFecha_limite() + "\n";
-                }else{
-                    acum += i +"|" + tareaAux.getDescripcion() + "\t||\t" + "Incompleta :(" + "\t||\t" + tareaAux.getPrioridad() + "\t||\t" + tareaAux.getFecha_limite() + "\n";
+            } else {
+                if (tareaAux.getEstado()) {
+                    acum += i +""+ AnsiColor.BLUE + "| Descripcion: " +AnsiColor.YELLOW + tareaAux.getDescripcion() + AnsiColor.BLUE +"\nEstado:"+AnsiColor.YELLOW +" Completada <3" + AnsiColor.BLUE +"\nPrioridad:" + AnsiColor.YELLOW +tareaAux.getPrioridad() +AnsiColor.BLUE+ "\nFecha limite:" +AnsiColor.YELLOW+ tareaAux.getFecha_limite() + "\n\n";
+                } else {
+                    acum += i +""+ AnsiColor.BLUE + "| Descripcion: " +AnsiColor.YELLOW + tareaAux.getDescripcion() + AnsiColor.BLUE +"\nEstado:"+AnsiColor.YELLOW +" Incompleta :( " + AnsiColor.BLUE +"\nPrioridad:" + AnsiColor.YELLOW +tareaAux.getPrioridad() +AnsiColor.BLUE+ "\nFecha limite:" +AnsiColor.YELLOW+ tareaAux.getFecha_limite() + "\n\n"+ AnsiColor.RESET;
                 }
             }
             i++;
