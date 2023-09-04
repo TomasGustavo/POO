@@ -1,8 +1,8 @@
-import ar.edu.unlu.poo.punto5.ListaTareas;
+import ar.edu.unlu.poo.punto5_13.ListaTareas;
 
 import java.util.Scanner;
 
-public class MainPunto5 {
+public class MainPunto5_13 {
 
     public static void menu(){
         System.out.println("1| Agregar Tarea a la lista");

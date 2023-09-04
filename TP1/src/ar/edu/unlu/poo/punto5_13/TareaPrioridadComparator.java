@@ -1,6 +1,4 @@
-package ar.edu.unlu.poo.punto5;
-
-import ar.edu.unlu.poo.punto5.Tarea;
+package ar.edu.unlu.poo.punto5_13;
 
 import java.util.Comparator;
 
