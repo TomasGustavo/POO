@@ -8,6 +8,8 @@ public class Tarea {
     private boolean estado;
     LocalDate fecha_limite;
     LocalDate fecha_recordatorio;
+    private Colaborador colaborador;
+    private LocalDate fechaFinalizacion;
     Tarea proximaTarea = null;
 
 
@@ -50,5 +52,21 @@ public class Tarea {
     }
     public LocalDate getFecha_recordatorio(){
         return fecha_recordatorio;
+    }
+
+    public void setColaborador(Colaborador colaborador) {
+        this.colaborador = colaborador;
+    }
+
+    public Colaborador getColaborador() {
+        return colaborador;
+    }
+
+    public void setFechaFinalizacion(LocalDate fechaFinalizacion) {
+        this.fechaFinalizacion = fechaFinalizacion;
+    }
+
+    public LocalDate getFechaFinalizacion() {
+        return fechaFinalizacion;
     }
 }

@@ -3,6 +3,8 @@ package ar.edu.unlu.poo.punto5;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ListaTareas {
@@ -103,6 +105,8 @@ public class ListaTareas {
         tareaAux.setDescripcion(nuevaDescp);
     }
     public void modificarEstado(int posicion){
+
+        Scanner sc = new Scanner(System.in);
         int i = 0;
         Tarea tareaAux = tarea;
         while( i != (posicion-1)){
@@ -112,6 +116,10 @@ public class ListaTareas {
         if(!tareaAux.getEstado()){
             tareaAux.setEstado(true);
         }
+        System.out.println("Ingrese nombre del colaborar que finalizo la tarea: ");
+        Colaborador colab = new Colaborador(sc.nextLine());
+        tareaAux.setColaborador(colab);
+        colab.realizarTarea(tareaAux);
     }
     public void modificarPrioridad(int priori, int posicion){
         int i = 0;
@@ -207,4 +215,21 @@ public class ListaTareas {
         }
         return acum;
     }
+
+
+
+    public List<Tarea> obtenerTareasRealizadasPorColaborador(Colaborador colaborador) {
+        List<Tarea> tareasRealizadasPorColaborador = new ArrayList<>();
+        Tarea tareaActual = tarea;
+
+        while (tareaActual != null) {
+            if (tareaActual.getColaborador() != null && tareaActual.getColaborador().equals(colaborador)) {
+                tareasRealizadasPorColaborador.add(tareaActual);
+            }
+            tareaActual = tareaActual.getProximaTarea();
+        }
+
+        return tareasRealizadasPorColaborador;
+    }
+
 }
