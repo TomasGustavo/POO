@@ -16,5 +16,6 @@ public class MainPunto1 {
         System.out.println(nuevoClub.mostrarSocios());
         nuevoClub.mostrarSocioporSubscripcion();
         nuevoClub.mostrarActividadPorSubscripcion();
+        System.out.println(nuevoClub.informeMensualSocios());
     }
 }
