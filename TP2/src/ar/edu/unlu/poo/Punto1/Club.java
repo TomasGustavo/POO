@@ -94,9 +94,9 @@ public class Club {
         System.out.println(mostrarActividades(actividadesDestacados));
     }
 
-    public String informeMensualSocios(){
+    public String informeMensualSocios(String mes){
         LocalDate fechaActual = LocalDate.now();
-        Month mesActual = fechaActual.getMonth();
+        Month mesActual = Month.valueOf(mes.toUpperCase());
         int anioActual =fechaActual.getYear();
         String acum ="\t\tInforme mensual de nuevos socios en"+mesActual+" "+anioActual+"\n\n\n";
         for(Socio socio : socios){

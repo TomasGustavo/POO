@@ -1,8 +1,8 @@
-import ar.edu.unlu.poo.Punto2.*;
+import ar.edu.unlu.poo.Punto9.*;
 
 import java.util.ArrayList;
 
-public class MainPunto2 {
+public class MainPunto9 {
     public static void main(String[] args) {
 
         ArrayList<Forma> formas = new ArrayList<>();

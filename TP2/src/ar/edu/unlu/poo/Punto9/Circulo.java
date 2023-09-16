@@ -1,4 +1,4 @@
-package ar.edu.unlu.poo.Punto2;
+package ar.edu.unlu.poo.Punto9;
 
 public class Circulo extends Forma2D{
     private String nombre = "Circulo";

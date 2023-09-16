@@ -1,5 +1,7 @@
 import ar.edu.unlu.poo.Punto1.Club;
 
+import java.util.Scanner;
+
 public class MainPunto1 {
     public static void main(String[] args) {
 
@@ -16,6 +18,9 @@ public class MainPunto1 {
         System.out.println(nuevoClub.mostrarSocios());
         nuevoClub.mostrarSocioporSubscripcion();
         nuevoClub.mostrarActividadPorSubscripcion();
-        System.out.println(nuevoClub.informeMensualSocios());
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Ingrese el mes del que quiera generar un imforme de los socios inscriptos: ");
+        String mes = sc.nextLine();
+        System.out.println(nuevoClub.informeMensualSocios(mes));
     }
 }

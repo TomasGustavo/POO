@@ -1,4 +1,4 @@
-package ar.edu.unlu.poo.Punto2;
+package ar.edu.unlu.poo.Punto9;
 
 public class Esfera extends Forma3D {
     private String nombre = "Esfera";
